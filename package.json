@@ -1,0 +1,21 @@
+{
+  "name": "crate-contrats",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "truffle": "^5.1.47",
+    "web3": "^1.3.0"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "test": "truffle test",
+    "coverage": "truffle run coverage"
+  },
+  "devDependencies": {
+    "eth-gas-reporter": "^0.2.17",
+    "solidity-coverage": "^0.7.10"
+  }
+}
