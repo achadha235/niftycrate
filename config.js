@@ -10,6 +10,8 @@ if (error) {
 
 module.exports = {
   NODE_ENV: String(parsed.NODE_ENV),
+  NEXT_DEV: parsed.NEXT_DEV === 'true',
+  PORT: Number(parsed.PORT) || 3001,
   ETH_NETWORK_ID: Number(parsed.ETH_NETWORK_ID),
   MNEMONIC: String(parsed.MNEMONIC),
   ETH_RPC_HOST: String(parsed.ETH_RPC_HOST),

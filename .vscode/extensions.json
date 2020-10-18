@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "apollographql.vscode-apollo",
+        "bradlc.vscode-tailwindcss",
+        "blanu.vscode-styled-jsx",
+        "esbenp.prettier-vscode"
+    ]
+}

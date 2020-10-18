@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/*.js": false,
+    "**/*.jsx": false,
+    "**/next.config.js": false
+  },
+  "editor.formatOnSave": true,
+  "solidity.compileUsingRemoteVersion": "v0.5.8"
+}

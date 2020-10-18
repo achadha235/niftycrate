@@ -1,0 +1,25 @@
+{
+    "object": "page",
+    "entry": [
+        {
+            "id": "116346153487679",
+            "time": 1598683071367,
+            "messaging": [
+                {
+                    "recipient": {
+                        "id": "116346153487679"
+                    },
+                    "timestamp": 1598683071367,
+                    "sender": {
+                        "id": "3442054245818142"
+                    },
+                    "referral": {
+                        "ref": "story-13",
+                        "source": "SHORTLINK",
+                        "type": "OPEN_THREAD"
+                    }
+                }
+            ]
+        }
+    ]
+}

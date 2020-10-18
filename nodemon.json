@@ -1,0 +1,15 @@
+{
+    "watch": [
+        "src/server",
+        "src/gql",
+        "src/entity"
+    ],
+    "ext": "ts",
+    "ignore": [
+        "src/**/*.spec.ts"
+    ],
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "exec": "ts-node src/server/index.ts"
+}
