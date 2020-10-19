@@ -31,7 +31,7 @@ import { fetchTokenData } from 'src/services/opensea';
 import { Token } from '../nft';
 function CratePage() {
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [addTokensOpen, setAddTokensOpen] = useState(true);
+  const [addTokensOpen, setAddTokensOpen] = useState(false);
   const { query } = useRouter();
   const drizzleState = useDrizzleState((state) => state);
   const [childTokenData, setChildTokenData] = useState([]);

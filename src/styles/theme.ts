@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ['PT Sans', 'sans-serif'].join(','),
+    fontFamily: ['Roboto', 'sans-serif'].join(','),
     allVariants: {
       color: tailwindConfig.theme.colors.white,
     },

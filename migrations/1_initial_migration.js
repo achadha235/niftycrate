@@ -12,7 +12,6 @@ module.exports = async function (deployer, network, accounts) {
 
   const Crate = await NiftyCrate.deployed();
   await Crate.setCrateOpener(NiftyCrateOpener.address);
-  console.log('Opener set', NiftyCrateOpener.address);
 
   let mintingPrice = web3.utils.toWei('1', 'ether');
   let openPrice = web3.utils.toWei('0.0013', 'ether'); // About 50 cents
@@ -31,7 +30,6 @@ module.exports = async function (deployer, network, accounts) {
         i,
         leftPadHexInteger(0)
       );
-      console.log('Transferred ', i);
     }
   }
   deployer.deploy(Migrations);

@@ -7,6 +7,7 @@ import shortAddress from 'src/utils/shortAddress';
 import NextNprogress from 'nextjs-progressbar';
 import tailwindConfig from '../../tailwind.config';
 import Web3 from 'web3';
+import { spawn } from 'child_process';
 
 function AppHeaderContainer() {
   const { account, balance } = useDrizzleState((drizzleState) => {
@@ -23,10 +24,10 @@ function AppHeaderContainer() {
   const generateNonces = useCacheSend(NCO, 'generateNonces');
   const { numTokens, numGems, mintCost } = useCacheCall([NC, NCO], (call) => ({
     numTokens: call(NC, 'balanceOf', account),
-    mintCost: call(NC, 'balanceOf', account),
+    mintCost: call(NC, 'mintingFee'),
     numGems: call(NCO, 'numberOfNonces', account),
   }));
-  const onBuyCrate = () => mint.send(account);
+  const onBuyCrate = () => mint.send(account, { value: mintCost });
   const onBuyGems = () => generateNonces.send(10);
   return (
     <>
@@ -38,14 +39,18 @@ function AppHeaderContainer() {
           height={3}
         />
       </div>
-      <AppBar style={{ marginTop: 3 }}>
+      <AppBar style={{ marginTop: 1 }}>
         <Toolbar variant='dense'>
           <Link href='/'>
-            <Typography variant='body2'>NiftyCrates</Typography>
+            <span className='uppercase text-sm font-medium tracking-widest cursor-pointer'>
+              NiftyCrates
+            </span>
           </Link>
-          <Button variant='text' className='ml-20' color='inherit'>
-            📦 My Crates ({numTokens})
-          </Button>
+          <Link href={`/crates/${account}`}>
+            <Button variant='text' className='ml-20' color='inherit'>
+              📦 My Crates ({numTokens})
+            </Button>
+          </Link>
           <Button
             onClick={onBuyCrate}
             className='ml-2'

@@ -1,27 +1,56 @@
 import * as _ from 'lodash';
 import range from 'src/utils/range';
 import CrateSummaryCard from 'src/components/CrateSummaryCard';
-import { useDrizzle } from 'src/utils/drizzle';
+import { useDrizzle, useDrizzleState } from 'src/utils/drizzle';
 import { Button, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
-function CrateBrowserContainer({ tokensPerPage = 6 }) {
+function OwnedCratesBrowserContainer({ tokensPerPage = 6 }) {
   const { useCacheCall } = useDrizzle();
-  const avaliableTokens = Number(useCacheCall('NiftyCrate', 'totalSupply'));
+  // const avaliableTokens = Number(useCacheCall('NiftyCrate', 'balanceOf'));
+  const NC = 'NiftyCrate';
+
   const router = useRouter();
   const { query } = router;
+  const { balanceOf, tokenIds } = useCacheCall([NC], (call) => {
+    debugger;
+    const balanceOf = Number(call(NC, 'balanceOf', query.address));
+    if (!isNaN(balanceOf)) {
+      const tokenIds = [...range(0, balanceOf)];
+      return {
+        balanceOf,
+        tokenIds: tokenIds
+          .map((i) => {
+            return call(NC, 'tokenOfOwnerByIndex', query.address, i);
+          })
+          .filter((x) => x !== undefined),
+      };
+    } else {
+      return {
+        balanceOf: 0,
+        tokenIds: [],
+      };
+    }
+  });
+
+  if (tokenIds) {
+    debugger;
+    console.log(tokenIds);
+  }
+
   const pageNumber = Number(query.page) || 1;
   const startToken = (pageNumber - 1) * tokensPerPage;
-  const numPages = Math.ceil(avaliableTokens / tokensPerPage);
-  const displayTokenIds = [
-    ...range(startToken, startToken + tokensPerPage),
-  ].filter((i) => i < avaliableTokens);
+  const numPages = Math.ceil(balanceOf / tokensPerPage);
+
+  const startIndex = (pageNumber - 1) * tokensPerPage;
+  const displayTokenIds = tokenIds;
 
   return (
     <>
       <div className='p-2 flex flex-wrap'>
         {displayTokenIds.map((tokenId) => {
           return (
+            // <div> {tokenId} </div>
             <CrateSummaryCard className='m-1' key={tokenId} crateId={tokenId} />
           );
         })}
@@ -66,4 +95,4 @@ function CrateBrowserContainer({ tokensPerPage = 6 }) {
   );
 }
 
-export default CrateBrowserContainer;
+export default OwnedCratesBrowserContainer;
