@@ -65,7 +65,6 @@ function CratePage() {
         children.map((child) => child && child[1])
       );
       setChildTokenData(tokenResults);
-      debugger;
     })();
     return cleanup;
   }, [children]);
@@ -168,7 +167,6 @@ function CratePage() {
                       if (isNil(child)) {
                         return null;
                       }
-                      debugger;
                       return (
                         <ListItem>
                           <ListItemAvatar>

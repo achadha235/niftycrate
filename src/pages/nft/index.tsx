@@ -111,7 +111,6 @@ export function Token({ index, transferToCrate }) {
           color='primary'
           variant='contained'
           onClick={() => {
-            debugger;
             safeTransfer.send(
               account,
               crateAddr,

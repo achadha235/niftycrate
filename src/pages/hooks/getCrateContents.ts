@@ -2,7 +2,6 @@ import { useDrizzle } from 'src/utils/drizzle';
 import { isNil } from 'lodash';
 
 function getCrateContents(crateId, numberOfTokens = 0) {
-  debugger;
   // if (isNil(crateId) || isNil(numberOfTokens) || numberOfTokens === 0) {
   //   return [];
   // }
