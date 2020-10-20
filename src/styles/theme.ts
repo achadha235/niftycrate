@@ -50,6 +50,7 @@ const theme = createMuiTheme({
         fontSize: '0.75rem',
       },
       root: {
+        cursor: 'pointer',
         outline: 'none !important',
       },
     },

@@ -18,6 +18,7 @@ import { Drizzle } from '@drizzle/store';
 import useEthereum from './hooks/useEthereum';
 import { drizzleReactHooks as DrizzleHooks } from '@drizzle/react-plugin';
 import { Store } from 'redux';
+import LoadingScreen from 'src/components/LoadingScreen';
 
 interface IAppContext {
   name?: string;
@@ -65,8 +66,8 @@ function App({ Component, pageProps, apollo, router, ...otherProps }) {
   return (
     <>
       <Head>
-        <title>Niftycrates</title>
-        <link rel='icon' type='image/svg+xml' href='images/favicon.svg' />
+        <title>N I F T Y C R A T E S</title>
+        <link rel='icon' type='image/svg+xml' href='/images/favicon.ico' />
       </Head>
       <ThemeProvider theme={theme}>
         <ApolloProvider client={apollo}>
@@ -74,8 +75,8 @@ function App({ Component, pageProps, apollo, router, ...otherProps }) {
             <DrizzleHooks.DrizzleProvider drizzle={drizzle}>
               <DrizzleHooks.Initializer
                 error='There was an error.'
-                loadingContractsAndAccounts='loading contracts & accounts...'
-                loadingWeb3='loading web3...'
+                loadingContractsAndAccounts={<LoadingScreen />}
+                loadingWeb3={<LoadingScreen />}
               >
                 <AppContext.Provider value={appContext}>
                   <Component key={router.route} {...pageProps} />

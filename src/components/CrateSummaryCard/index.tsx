@@ -4,6 +4,7 @@ import { useDrizzle, ContractForm, useDrizzleState } from 'src/utils/drizzle';
 import Web3 from 'web3';
 import Paper from '@material-ui/core/Paper';
 import shortAddress from 'src/utils/shortAddress';
+import { motion } from 'framer-motion';
 
 function CrateSummaryCard({ crateId, className }) {
   const { drizzle, useCacheCall, useCacheSend } = useDrizzle();
@@ -87,7 +88,6 @@ function CrateSummaryCard({ crateId, className }) {
           </div>
         </div>
       </Link>
-
       <style jsx>{`
         .crateSummaryCard {
           width: 300px;

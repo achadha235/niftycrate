@@ -4,6 +4,7 @@ import CrateSummaryCard from 'src/components/CrateSummaryCard';
 import { useDrizzle } from 'src/utils/drizzle';
 import { Button, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router';
+import { AnimatePresence, motion, AnimateSharedLayout } from 'framer-motion';
 
 function CrateBrowserContainer({ tokensPerPage = 6 }) {
   const { useCacheCall } = useDrizzle();
@@ -17,21 +18,69 @@ function CrateBrowserContainer({ tokensPerPage = 6 }) {
     ...range(startToken, startToken + tokensPerPage),
   ].filter((i) => i < avaliableTokens);
 
+  const pageAnimations = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+    },
+    exit: {
+      y: 0,
+      opacity: 1,
+    },
+    transition: {
+      duration: 6,
+      ease: 'easeOut',
+      staggerChildren: 1,
+      delayChildren: 0.2,
+    },
+  };
   return (
     <>
-      <div className='p-2 flex flex-wrap'>
-        {displayTokenIds.map((tokenId) => {
-          return (
-            <CrateSummaryCard className='m-1' key={tokenId} crateId={tokenId} />
-          );
-        })}
+      <div className='p-2 pt-0 flex flex-wrap'>
+        <AnimateSharedLayout type='crossfade'>
+          <AnimatePresence exitBeforeEnter={true}>
+            {displayTokenIds.map((tokenId, i) => {
+              return (
+                <motion.div
+                  variants={{
+                    show: {
+                      opacity: 1,
+                      transition: { duration: 0.5, delay: i * 0.083 },
+                    },
+                    hidden: {
+                      opacity: 0,
+                      transition: {
+                        duration: 0.1,
+                      },
+                    },
+                  }}
+                  initial={'hidden'}
+                  animate={'show'}
+                  key={tokenId}
+                >
+                  <CrateSummaryCard
+                    className='m-1'
+                    key={tokenId}
+                    crateId={tokenId}
+                  />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </AnimateSharedLayout>
       </div>
+
       {numPages > 1 && (
         <div
           className='flex flex-row w-full justify-center'
           style={{ position: 'absolute', bottom: 10, left: 0 }}
         >
           <Button
+            disabled={pageNumber === 1}
             onClick={() =>
               router.push({
                 pathname: router.pathname,
@@ -47,10 +96,20 @@ function CrateBrowserContainer({ tokensPerPage = 6 }) {
                 {pageNum}
               </Button>
             ) : (
-              <Button> {pageNum} </Button>
+              <Button
+                onClick={() =>
+                  router.push({
+                    pathname: router.pathname,
+                    query: { ...query, page: pageNum },
+                  })
+                }
+              >
+                {pageNum}
+              </Button>
             )
           )}
           <Button
+            disabled={pageNumber === numPages}
             onClick={() =>
               router.push({
                 pathname: router.pathname,

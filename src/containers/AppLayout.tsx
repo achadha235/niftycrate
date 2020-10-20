@@ -20,8 +20,8 @@ function AppLayoutContainer({ children }) {
     <>
       <AppHeaderContainer />
 
-      <AnimateSharedLayout>
-        <AnimatePresence exitBeforeEnter>
+      <AnimateSharedLayout type='crossfade'>
+        <AnimatePresence exitBeforeEnter={true}>
           <motion.div className='mt-16' key={router.asPath} {...pageAnimations}>
             {children}
           </motion.div>
@@ -32,11 +32,11 @@ function AppLayoutContainer({ children }) {
 }
 
 const pageAnimations = {
-  initial: { opacity: 0, y: -5 },
+  initial: { opacity: 1, y: 0 },
   animate: { opacity: 1, y: 0 },
   exit: {
-    y: -5,
-    opacity: 0,
+    y: 0,
+    opacity: 1,
     transition: { duration: 0.3, ease: 'easeOut' },
   },
   transition: { duration: 0.2, ease: 'easeInOut' },
