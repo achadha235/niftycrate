@@ -114,7 +114,7 @@ function CrateSummaryCard({ crateId, className }) {
                     src='/images/emptyCrate.svg'
                     style={{ height: 100, width: 100 }}
                   />
-                  <Typography>EMPTY</Typography>
+                  <Typography style={{ color: '#a7a7a7' }}>EMPTY</Typography>
                 </div>
               )}
 
@@ -158,7 +158,7 @@ function CrateSummaryCard({ crateId, className }) {
                   </Typography>
                 </div>
                 <div className='flex flex-row'>
-                  <div className='flex-1'>
+                  <div className='flex-1 pr-1'>
                     <Typography className='' style={{ fontSize: 8 }}>
                       Ultra
                     </Typography>
