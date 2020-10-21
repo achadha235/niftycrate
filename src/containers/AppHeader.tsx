@@ -73,10 +73,13 @@ function AppHeaderContainer() {
             Buy 10 Gems
           </Button>
           <Button variant='text' className='ml-auto' color='inherit'>
-            <b>Ξ </b> ETH ({Web3.utils.fromWei(balance, 'ether').slice(0, 5)})
+            <b className='pr-1'>Ξ</b>{' '}
+            {Web3.utils.fromWei(balance, 'ether').slice(0, 5)}
           </Button>
           {account ? (
-            <Button color='inherit'>{shortAddress(account)}</Button>
+            <Button style={{ fontFamily: 'courier' }} color='inherit'>
+              {shortAddress(account)}
+            </Button>
           ) : (
             <Button color='inherit'>Login</Button>
           )}

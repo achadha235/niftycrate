@@ -18,34 +18,15 @@ function CrateBrowserContainer({ tokensPerPage = 6 }) {
     ...range(startToken, startToken + tokensPerPage),
   ].filter((i) => i < avaliableTokens);
 
-  const pageAnimations = {
-    initial: {
-      opacity: 0,
-      y: 0,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-    },
-    exit: {
-      y: 0,
-      opacity: 1,
-    },
-    transition: {
-      duration: 6,
-      ease: 'easeOut',
-      staggerChildren: 1,
-      delayChildren: 0.2,
-    },
-  };
   return (
     <>
-      <div className='p-2 pt-0 flex flex-wrap'>
+      <div className='p-2 pt-0 flex flex-wrap justify-center'>
         <AnimateSharedLayout type='crossfade'>
           <AnimatePresence exitBeforeEnter={true}>
             {displayTokenIds.map((tokenId, i) => {
               return (
                 <motion.div
+                  key={tokenId}
                   variants={{
                     show: {
                       opacity: 1,
@@ -60,7 +41,6 @@ function CrateBrowserContainer({ tokensPerPage = 6 }) {
                   }}
                   initial={'hidden'}
                   animate={'show'}
-                  key={tokenId}
                 >
                   <CrateSummaryCard
                     className='m-1'
@@ -92,7 +72,11 @@ function CrateBrowserContainer({ tokensPerPage = 6 }) {
           </Button>
           {[...range(1, numPages + 1)].map((pageNum) =>
             pageNum === pageNumber ? (
-              <Button variant='outlined' style={{ fontWeight: 600 }}>
+              <Button
+                key={pageNumber}
+                variant='outlined'
+                style={{ fontWeight: 600 }}
+              >
                 {pageNum}
               </Button>
             ) : (

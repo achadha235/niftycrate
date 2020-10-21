@@ -16,5 +16,6 @@ export async function fetchTokenData(tokenAddress, tokenIds) {
   );
   const result = (await resp.json()).assets;
   cache[key] = result;
+  console.log(result);
   return result;
 }
