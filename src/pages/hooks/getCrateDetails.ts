@@ -2,6 +2,9 @@ import { useDrizzle, ContractForm, useDrizzleState } from 'src/utils/drizzle';
 import range from 'src/utils/range';
 import { isNil } from 'lodash';
 function getCrateDetails(crateId) {
+  if (isNil(crateId)) {
+    return null;
+  }
   const { useCacheCall } = useDrizzle();
   const NC = 'NiftyCrate';
   const {

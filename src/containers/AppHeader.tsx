@@ -39,15 +39,11 @@ function AppHeaderContainer() {
           height={3}
         />
       </div>
-      <AppBar style={{ marginTop: 1 }}>
+      <AppBar className='appBar'>
         <Toolbar variant='dense'>
           <Link href='/'>
             <span className='uppercase text-sm font-medium tracking-widest cursor-pointer flex flex-row justify-center items-center'>
-              <img
-                className='mr-1'
-                src='/images/logo.svg'
-                style={{ height: 25, width: 25, fontWeight: 400 }}
-              />
+              <img className='mr-1 logo' src='/images/logo.svg' />
               <b>Nifty</b>Crates
             </span>
           </Link>
@@ -91,10 +87,21 @@ function AppHeaderContainer() {
         </Toolbar>
       </AppBar>
       <style jsx>{`
+        .appBar {
+          margintop: 1px;
+        }
         .progressWrapper {
           height: 3px !important;
           width: 100vw;
           background: black;
+        }
+        .addressButton {
+          font-family: 'Courier';
+        }
+
+        .logo {
+          height: 25px;
+          width: 25px;
         }
       `}</style>
     </>

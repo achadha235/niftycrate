@@ -38,6 +38,12 @@ function CratePage() {
   // const { drizzle, useCacheEvents } = useDrizzle();
   const account = drizzleState.accounts[0];
   // const [settingsOpen, setSettingsOpen] = useState(false);
+
+  const crateDetails = getCrateDetails(query.id);
+  // if (isNil(crateDetails)) {
+  //   return null
+  // }
+
   const {
     owner,
     numberOfChildren,
@@ -49,7 +55,7 @@ function CratePage() {
     crateOpener,
     customCrateOpener,
     tokens,
-  } = getCrateDetails(query.id);
+  } = crateDetails || {};
 
   const isOwner =
     account && owner && account.toLowerCase() === owner.toLowerCase();
@@ -149,7 +155,7 @@ function CratePage() {
                     </Button>
                   )}
                 </Typography>
-                {tokens.length === 0 && (
+                {tokens && tokens.length === 0 && (
                   <div className='w-full flex justify-center items-center flex-col h-32'>
                     <Typography>This Crate is Empty</Typography>
                     <Button
@@ -273,22 +279,23 @@ function CratePage() {
                 <TokenTransferBrowser crateId={query.id} />
               </div>
               <div className='flex-1 bg-green-700'>
-                {tokens.map((child, i) => {
-                  return (
-                    <Card
-                      className='w-2/5'
-                      style={{
-                        backgroundColor: childTokenData[i]?.background_color
-                          ? `#${childTokenData[i].background_color}`
-                          : 'none',
-                      }}
-                    >
-                      {child && <CardHeader title={child[1]} />}
-                      <img src={childTokenData[i]?.image_thumbnail_url} />
-                    </Card>
-                  );
-                  // return <TokenFoo address={child[0]} tokenId={child[1]} />;
-                })}
+                {tokens &&
+                  tokens.map((child, i) => {
+                    return (
+                      <Card
+                        className='w-2/5'
+                        style={{
+                          backgroundColor: childTokenData[i]?.background_color
+                            ? `#${childTokenData[i].background_color}`
+                            : 'none',
+                        }}
+                      >
+                        {child && <CardHeader title={child[1]} />}
+                        <img src={childTokenData[i]?.image_thumbnail_url} />
+                      </Card>
+                    );
+                    // return <TokenFoo address={child[0]} tokenId={child[1]} />;
+                  })}
               </div>
             </div>
           </Paper>
