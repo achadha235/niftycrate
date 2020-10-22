@@ -36,7 +36,7 @@ function CratePage() {
   const { query } = useRouter();
   return (
     <AppLayoutContainer>
-      <div className='w-full max-w-4xl mx-auto'>
+      <div className='w-full max-w-5xl mx-auto'>
         <CrateView crateId={query.id} />
       </div>
     </AppLayoutContainer>
