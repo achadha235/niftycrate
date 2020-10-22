@@ -1,9 +1,9 @@
-import * as _ from 'lodash';
+import { useRouter } from 'next/router';
+import { AnimatePresence, motion, AnimateSharedLayout } from 'framer-motion';
+
 import range from 'src/utils/range';
 import CrateSummaryCard from 'src/components/CrateSummaryCard';
 import { useDrizzle } from 'src/utils/drizzle';
-import { useRouter } from 'next/router';
-import { AnimatePresence, motion, AnimateSharedLayout } from 'framer-motion';
 import PageControls from 'src/components/PageControls';
 
 function CrateBrowserContainer({ tokensPerPage = 6 }) {
@@ -34,8 +34,8 @@ function CrateBrowserContainer({ tokensPerPage = 6 }) {
                   animate={'show'}
                 >
                   <CrateSummaryCard
-                    className='m-1'
                     key={tokenId}
+                    className='m-1'
                     crateId={tokenId}
                   />
                 </motion.div>

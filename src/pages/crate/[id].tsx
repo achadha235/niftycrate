@@ -48,7 +48,7 @@ function CratePage() {
     openFee,
     crateOpener,
     customCrateOpener,
-    children,
+    tokens,
   } = getCrateDetails(query.id);
 
   const isOwner =
@@ -56,18 +56,18 @@ function CratePage() {
 
   useEffect(() => {
     const cleanup = () => {};
-    if (isNil(children) || children.indexOf(undefined) > -1) {
+    if (isNil(tokens) || tokens.indexOf(undefined) > -1) {
       return cleanup;
     }
     (async () => {
       const tokenResults = await fetchTokenData(
         mockTokenMapping.Cryptokitties,
-        children.map((child) => child && child[1])
+        tokens.map((child) => child && child[1])
       );
       setChildTokenData(tokenResults);
     })();
     return cleanup;
-  }, [children]);
+  }, [tokens]);
 
   // const [children, setChildren] = useState([]);
   // const children = getCrateContents(query.id, numberOfChildren);
@@ -140,7 +140,7 @@ function CratePage() {
               <Paper className='p-4 mt-2'>
                 <Typography variant='h6'>
                   Contents
-                  {children && children.length > 0 && (
+                  {tokens && tokens.length > 0 && (
                     <Button
                       onClick={() => setAddTokensOpen(true)}
                       color='primary'
@@ -149,7 +149,7 @@ function CratePage() {
                     </Button>
                   )}
                 </Typography>
-                {children.length === 0 && (
+                {tokens.length === 0 && (
                   <div className='w-full flex justify-center items-center flex-col h-32'>
                     <Typography>This Crate is Empty</Typography>
                     <Button
@@ -161,9 +161,9 @@ function CratePage() {
                   </div>
                 )}
 
-                {children && children.length > 0 && (
+                {tokens && tokens.length > 0 && (
                   <List className='full'>
-                    {children.map((child, i) => {
+                    {tokens.map((child, i) => {
                       if (isNil(child)) {
                         return null;
                       }
@@ -273,7 +273,7 @@ function CratePage() {
                 <TokenTransferBrowser crateId={query.id} />
               </div>
               <div className='flex-1 bg-green-700'>
-                {children.map((child, i) => {
+                {tokens.map((child, i) => {
                   return (
                     <Card
                       className='w-2/5'

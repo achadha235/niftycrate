@@ -33,7 +33,7 @@ function AppHeaderContainer() {
     <>
       <div className='progressWrapper'>
         <NextNprogress
-          color={tailwindConfig.theme.colors.blue[300]}
+          color={tailwindConfig.theme.colors.indigo[500]}
           startPosition={0.5}
           stopDelayMs={200}
           height={3}
@@ -42,8 +42,13 @@ function AppHeaderContainer() {
       <AppBar style={{ marginTop: 1 }}>
         <Toolbar variant='dense'>
           <Link href='/'>
-            <span className='uppercase text-sm font-medium tracking-widest cursor-pointer'>
-              NiftyCrates
+            <span className='uppercase text-sm font-medium tracking-widest cursor-pointer flex flex-row justify-center items-center'>
+              <img
+                className='mr-1'
+                src='/images/logo.svg'
+                style={{ height: 25, width: 25, fontWeight: 400 }}
+              />
+              <b>Nifty</b>Crates
             </span>
           </Link>
           <Link href={`/crates/${account}`}>

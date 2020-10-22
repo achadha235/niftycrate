@@ -24,14 +24,23 @@ function PageControls({ pageNumber, numPages }) {
       {[...range(1, numPages + 1)].map((pageNum) =>
         pageNum === pageNumber ? (
           <Button
-            key={pageNumber}
+            className='mx-1'
+            key={pageNum}
             variant='outlined'
-            style={{ fontWeight: 600 }}
+            style={{
+              fontWeight: 600,
+              height: 40,
+              minWidth: 40,
+              borderRadius: 20,
+            }}
           >
             {pageNum}
           </Button>
         ) : (
           <Button
+            key={pageNum}
+            className='mx-1'
+            style={{ height: 40, minWidth: 40, borderRadius: 20 }}
             onClick={() =>
               router.push({
                 pathname: router.pathname,

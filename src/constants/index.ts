@@ -1,6 +1,7 @@
 export default {};
 
 export const AuthToken = 'AuthToken';
+export const NC = 'NiftyCrates';
 export const BNSelectedWallet = 'BNSelectedWallet';
 export const mockTokenMapping = {
   Cryptokitties: '0x06012c8cf97bead5deae237070f9587f8e7a266d',

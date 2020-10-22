@@ -47,11 +47,22 @@ const theme = createMuiTheme({
       text: {
         fontSize: '0.75rem',
       },
+      label: {
+        transform: 'translateX(1px)',
+      },
       root: {
-        cursor: 'pointer',
+        cursor: 'pointer !important',
         outline: 'none !important',
-        fontWeight: 500,
+        fontWeight: 600,
         letterSpacing: 1,
+      },
+    },
+
+    MuiBadge: {
+      anchorOriginTopRightRectangle: {
+        fontWeight: 600,
+        top: 8,
+        right: 10,
       },
     },
   },

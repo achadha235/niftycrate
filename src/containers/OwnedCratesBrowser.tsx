@@ -13,7 +13,6 @@ function OwnedCratesBrowserContainer({ tokensPerPage = 6 }) {
   const router = useRouter();
   const { query } = router;
   const { balanceOf, tokenIds } = useCacheCall([NC], (call) => {
-    debugger;
     const balanceOf = Number(call(NC, 'balanceOf', query.address));
     if (!isNaN(balanceOf)) {
       const tokenIds = [...range(0, balanceOf)];
@@ -34,7 +33,6 @@ function OwnedCratesBrowserContainer({ tokensPerPage = 6 }) {
   });
 
   if (tokenIds) {
-    debugger;
     console.log(tokenIds);
   }
 
