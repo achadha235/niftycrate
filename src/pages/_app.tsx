@@ -66,8 +66,8 @@ function App({ Component, pageProps, apollo, router, ...otherProps }) {
   return (
     <>
       <Head>
-        <title>N I F T Y C R A T E S</title>
-        <link rel='icon' type='image/svg+xml' href='/images/favicon.ico' />
+        <title>Niftycrates</title>
+        <link rel='icon' type='image/svg+xml' href='/images/logo.svg' />
       </Head>
       <ThemeProvider theme={theme}>
         <ApolloProvider client={apollo}>
