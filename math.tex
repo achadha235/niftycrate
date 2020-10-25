@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{NiftyCrates}
+\author{Abhishek Chadha }
+\date{October 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+NiftyCrates  
+
+
+\section{Crate Opening Logic}
+
+We can model a NiftyCrate as an array $A_{n} = [T_{0}, T_{1} ... T_{n}]$  of tokens. Let $R_{i}$ be the rank of token $T_{i}$ where $0 \leq R_{i} \leq M$ and $M = 2^{32}$. Let $X$ be a discrete random variable assigned when the user opens a crate where $0 \leq X \leq M$. We use the following routine to decide which token the user recieves from the crate.
+
+\begin{enumerate}
+	\item Start at $T_{k}$ where $k \equiv_{n} X$
+	\item If $X \geq R_{k}$, return $T_{k}$
+	\item If $X < R_{k}$ move on to $T_{k+1 (\bmod\; n)}$
+	\item Repeat 2-3 until a $T_{i}$ is returned or until all tokens are checked
+	\item If no $T_{i}$ is returned, return $null$
+\end{enumerate}
+
+\section{Probabilities of Winning}
+
+\textbf{Single Draw:} 
+Let $W_{i}$ be the event that we win $T_{i}$.We wish to establish an upper and lower bound for $W_{i}$. Intuitively, we see the lower bound would occur when the rank array is $[M, M, M...0...M, M]$ and the upper bound would occur when it is $[0, 0, 0...M...0, 0]$.\\ \\There  are three possible cases. The first and simplest case is where start on the desired token:
+\begin{equation}
+C_{1} = P\left( W_{i}  \mid X = i \bmod\; n \right) = \frac{1}{n} \cdot \right \left( 1-\frac{R_{i}}{M} \right)
+\end{equation}
+The second case occurs when we land on an index $i' < i$. \\
+In this case $W_{i} \iff \forall \left(i' \leq k < i \right) X \geq R_{k} \wedge X < R_{i}$ \\ \\
+This works out to be
+\begin{equation}
+C_{2} = P\left( W_{i}  \mid X < i \bmod\; n \right)
+\end{equation}
+\begin{equation}
+= \frac{1}{Mn} \cdot \sum\limits_{x=0}^{i-1}\max\left(0, \left(\min\limits_{k =x}^{ i-1} R_{k}\right)-R_{i}\right)
+\end{equation}
+Finally, the third case occurs when when we land on an index $i' > i$. In this case $W_{i}$ occurs only when $\forall i' \geq k < i$ no $X \geq R_{i}$ and $X < R_{k}$
+\begin{equation}
+C_{3} = P\left( W_{i} \mid X > i \bmod\; n \right)
+\end{equation}
+\begin{equation}
+= \frac{C_{2}}{Mn} \cdot \sum\limits_{x=i+1}^{n}\max\left(0, \left(\min\limits_{k =x}^{n} R_{k}\right)-R_{i}\right) 
+\end{equation}
+Expanding the full expression, we get
+\begin{equation}
+P(W_{i}) = C_{1} + C_{2} + C_{3}
+\end{equation}
+\begin{equation}
+\frac{1}{n} \cdot \right \left( 1-\frac{R_{i}}{M} \right) + C_{2} + \frac{C_{2}}{Mn} \cdot \sum\limits_{x=i+1}^{n}\max\left(0, \left(\min\limits_{k =x}^{n} R_{k}\right)-R_{i}\right)
+\end{equation}
+
+\begin{equation}
+=\frac{1}{n} \cdot \right \left( 1-\frac{R_{i}}{M} \right) + C_{2} \left(1 + \frac{1}{Mn} \cdot \sum\limits_{x=i+1}^{n}\max\left(0, \left(\min\limits_{k =x}^{n} R_{k}\right)-R_{i}\right)\right)
+\end{equation}
+
+
+\begin{equation}
+=\frac{1}{n} \cdot \right \left( 1-\frac{R_{i}}{M} \right) + \left( \frac{1}{Mn} \cdot \sum\limits_{x=0}^{i-1}\max\left(0, \left(\min\limits_{k =x}^{ i-1} R_{k}\right)-R_{i}\right) \right) \cdot \left(1 + \frac{1}{Mn} \cdot \sum\limits_{x=i+1}^{n}\max\left(0, \left(\min\limits_{k =x}^{n} R_{k}\right)-R_{i}\right)\right)
+\end{equation}\\
+The lower bound for $W{i}$ is simply the first term  $\frac{1}{n} \cdot \right \left( 1-\frac{R_{i}}{M} \right)$. To establish the upper bound we set
+
+\begin{equation}
+\min\limits_{k =x}^{ i-1} R_{k} = M ~ (\forall x)
+\end{equation}
+\begin{equation}
+\Longrightarrow \sum\limits_{x=0}^{i-1}\max\left(0, M-R_{i}\right)
+= i\cdot(M - R_{i})
+\end{equation}
+and similarly
+\begin{equation}
+\min\limits_{k =x}^{n} R_{k} = M ~ (\forall x)
+\end{equation}
+\begin{equation}
+\Longrightarrow \sum\limits_{x=i+1}^{n}\max\left(0, M-R_{i}\right)
+= (n - i - 1)\cdot(M - R_{i})
+\end{equation}
+
+Then our upperbound is:
+\begin{equation}
+\frac{1}{n} \cdot \right \left( 1-\frac{R_{i}}{M} \right) + \left( \frac{i\cdot(M - R_{i})}{Mn}\right) \right) \cdot \left(1 + \frac{(n - i - 1)\cdot(M - R_{i})}{Mn} \right)\right)
+\end{equation}
+
+So finally we have that
+
+\begin{equation}
+\frac{1}{n} \left(1 - \frac{R_{i} + iM + iR_{i} + (iM - R_{i})(n - i - 1)(M-R_{i})}{M} \right)
+\end{equation}
+
+\section{Example}
+
+So lets say we have a CryptoKitty worth \$500 in a NiftyCrate with 15 other tokens. 
+
+\end{document}
