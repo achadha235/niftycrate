@@ -20,10 +20,8 @@ import Web3 from 'web3';
 
 function CrateView({ crateId }) {
   const { useCacheSend, useCacheCall } = useDrizzle();
-
   const crateDetails = getCrateDetails(crateId);
   const [tokenData, setTokenData] = useState(null);
-  const [settingsOpen, setSettingsOpen] = useState(true);
   const { openFee, openCost } = crateDetails || {};
   const [winModalOpen, setWinModalOpen] = useState(false);
   const [winningToken, setWinningToken] = useState(null);
@@ -31,6 +29,7 @@ function CrateView({ crateId }) {
   const totalOpenCost = Web3.utils
     .toBN(openCost || '0')
     .add(Web3.utils.toBN(openFee || '0'));
+
   const { send, TXObjects } = useCacheSend(NC, 'open');
   const onOpenCrate = async () => {
     const res = await send(crateId, 0, { value: totalOpenCost });
@@ -46,7 +45,6 @@ function CrateView({ crateId }) {
         const tokenId = tx.receipt.events.CrateOpened.returnValues[4];
 
         const tdata = tokenData.find(({ token_id }) => token_id === tokenId);
-        debugger;
         setWinningToken({
           tokenData: tdata,
           tokenAddr,
@@ -56,10 +54,10 @@ function CrateView({ crateId }) {
         // alert(`${tokenAddr} - ${tokenId}`);
         fireConfetti();
 
-        setTimeout(() => {
-          setWinModalOpen(false);
-          setWinningToken(null);
-        }, 5000);
+        // setTimeout(() => {
+        // setWinModalOpen(false);
+        // setWinningToken(null);
+        // }, 5000);
       }
     }
   }, [TXObjects[TXObjects.length - 1]]);
@@ -118,7 +116,14 @@ function CrateView({ crateId }) {
 
   return (
     <div className='flex pt-3 justify-center'>
-      <Modal open={winModalOpen} className='flex justify-center items-center'>
+      <Modal
+        open={winModalOpen}
+        className='flex justify-center items-center'
+        onClose={() => {
+          setWinModalOpen(false);
+          setWinningToken(null);
+        }}
+      >
         <Fade in={winModalOpen}>
           <Paper className='m-4'>
             <Typography variant='h1'>You Won!</Typography>
@@ -154,26 +159,35 @@ function CrateView({ crateId }) {
         <div className='flex-1 flex flex-grow px-2'>
           <div className='flex-1'>
             <Crate tokens={tokenData} />
-            <div className='px-3'>
+            <div className='px-3 flex-col'>
               <Button
+                className='flex-1'
                 disabled={isNil(crateDetails) || !crateDetails.canOpen}
                 size='large'
                 variant='contained'
-                color='primary'
-                fullWidth={true}
+                color='secondary'
                 onClick={onOpenCrate}
               >
-                Open
+                Open Crate <br /> 💎 + Ξ{' '}
+                {Web3.utils.fromWei(totalOpenCost, 'ether')}
               </Button>
 
               <Button
-                className='mt-2'
+                className='flex-1 ml-2'
                 size='large'
                 variant='contained'
-                color='secondary'
-                fullWidth={true}
+                color='primary'
               >
-                Buy
+                Buy Crate <br /> Ξ{' '}
+                {Web3.utils.fromWei(crateDetails.openCost || '0', 'ether')}
+              </Button>
+
+              <Button
+                className='flex-1 ml-2 py-5'
+                size='large'
+                variant='outlined'
+              >
+                Settings
               </Button>
             </div>
           </div>

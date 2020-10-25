@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Web3 from 'web3';
 import { isNil } from 'lodash';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Button, Typography, Avatar, Paper, Badge } from '@material-ui/core';
@@ -24,11 +24,11 @@ function EmptyCrateThumbnail() {
 
 function selectNItems(arr, n, startIndex) {
   let res = [];
-  for (var i = startIndex; i < startIndex + n; i++) {
-    const item = arr[i % arr.length];
-    item && res.push(item);
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] && res.push(arr[(startIndex + i) % arr.length]);
   }
-  return res;
+
+  return [...res];
 }
 
 function CrateThumbnailImages({ tokens }) {
@@ -41,22 +41,35 @@ function CrateThumbnailImages({ tokens }) {
       if (nextIdx >= tokens.length) {
         nextIdx = 0;
       }
-      console.log('nextIdx', nextIdx, 'tokens.length', tokens.length);
       setStartIdx(nextIdx);
     }, switchPageIntervalMs);
     return () => {
       clearInterval(pageTransitionInterval);
     };
   }, [tokens, startIdx, tokens.length]);
+
+  useEffect(() => {
+    for (var i = 0; i < tokens.length; i++) {
+      const newImg = new Image(100, 100);
+      newImg.src = tokens[i].image_preview_url;
+    }
+  }, [tokens, startIdx, tokens.length]);
   return (
-    <>
+    <AnimatePresence exitBeforeEnter={true}>
       {selectNItems(tokens, numPerScreen, startIdx).map((tokenData, i) => (
         <motion.img
-          key={tokenData.image_thumbnail_url}
-          src={tokenData.image_thumbnail_url}
+          initial='hide'
+          animate='show'
+          exit='hide'
+          key={`${tokenData.image_preview_url}::${startIdx}`}
+          src={tokenData.image_preview_url}
           variants={{
             show: {
               opacity: 1,
+              transition: { duration: 0.4, delay: i * 0.05 },
+            },
+            hide: {
+              opacity: 0,
               transition: { duration: 0.4, delay: i * 0.05 },
             },
           }}
@@ -69,7 +82,7 @@ function CrateThumbnailImages({ tokens }) {
           }}
         />
       ))}
-    </>
+    </AnimatePresence>
   );
 }
 
@@ -86,7 +99,6 @@ function CrateSummaryCardImages({ loading, tokens, numberOfChildren }) {
     const fetchData = async () => {
       const tokenData = await fetchTokenData(filterRank(tokens));
       setTokenData(tokenData);
-      console.log(tokenData);
     };
     fetchData();
   };

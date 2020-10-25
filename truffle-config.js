@@ -22,6 +22,15 @@ module.exports = {
         );
       },
     },
+    matic: {
+      network_id: '80001',
+      provider: function () {
+        return new HDWalletProvider(
+          config.MNEMONIC,
+          'https://rpc-mumbai.matic.today'
+        );
+      },
+    },
   },
   plugins: ['solidity-coverage', 'truffle-contract-size'],
   mocha: {

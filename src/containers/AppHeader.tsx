@@ -39,7 +39,7 @@ function AppHeaderContainer() {
           height={3}
         />
       </div>
-      <AppBar className='appBar'>
+      <AppBar className='appBar' style={{ marginTop: 3 }}>
         <Toolbar variant='dense'>
           <Link href='/'>
             <span className='uppercase text-sm font-medium tracking-widest cursor-pointer flex flex-row justify-center items-center'>
