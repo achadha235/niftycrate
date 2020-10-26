@@ -9,7 +9,7 @@
 Decentralized ERC-721 loot boxes built with a Top-down composable ERC-721
 
 ### Did you start working on this before the 8th of October?
-I start programming on October 8th. Spent some time designing app / contracts from October 1 - 8th.
+I started programming on October 8th. Spent some time designing app / contracts from October 1 - 8th.
  
 #### Link to a video demo (please keep to 5 minutes)
 - https://www.youtube.com/watch?v=pu_pdAC7Yak&feature=youtu.be
@@ -51,7 +51,7 @@ https://docs.google.com/presentation/d/13NcaobQDCjwW61CNxtJ9vBzvIrsfzZOMaAickHM3
 3. Pay the opening fee cost use a gem to draw an item from the NiftyCrate
 
 ## Rinkeby Deployment
-
+```
 > Executing task: npm run deploy:contracts <
 
 
