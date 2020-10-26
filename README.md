@@ -1,4 +1,32 @@
-# 📦📦📦 NiftyCrates - ETHGLOBAL2020 📦📦📦
+# 📦📦📦 NiftyCrates - ETHGLOBAL2020 / NFT Untitled 2020 📦📦📦
+
+### Team (include twitter/telegram contact)
+- Abhi: Telegram @abhishek_c137 / Discord abhi#3948 
+- https://www.linkedin.com/in/abhishek-chadha-53b09364
+- https://twitter.com/achadha235
+
+### One sentence description of what you built
+Decentralized ERC-721 loot boxes built as a top-down composable NFT
+
+### Did you start working on this before the 8th of October?
+- I started programming on October 8th. Spent some time designing app / contracts from October 1 - 8th.
+ 
+#### Link to a video demo (please keep to 5 minutes)
+- https://www.youtube.com/watch?v=pu_pdAC7Yak&feature=youtu.be
+
+#### Link to a presentation
+- https://docs.google.com/presentation/d/13NcaobQDCjwW61CNxtJ9vBzvIrsfzZOMaAickHM3460/edit?usp=sharing
+
+#### Link to a working product/live demo
+- Coming Soon!
+
+#### Link to a github repo/more
+- https://github.com/achadha235/niftycrate
+- Crate Opener Math - https://drive.google.com/file/d/1D75BqJahzkD2ZGY-y4vQRWiQB9778fKP/view?usp=sharing
+
+#### ETH Address to receive NFTs/ETH/DAI prizes and bounties 
+- https://etherscan.io/address/0x02Ee97a13e434717e3FFa12758a235D1a1680775
+
 
 ## For NFT Whales: Turn your NFTs into a profitable lootbox.
 
@@ -23,58 +51,7 @@
 3. Pay the opening fee cost use a gem to draw an item from the NiftyCrate
 
 ## Rinkeby Deployment
-
 ```
-> NODE_ENV=development truffle migrate development
-
-
-Compiling your contracts...
-===========================
-> Everything is up to date, there is nothing to compile.
-
-
-
-Migrations dry-run (simulation)
-===============================
-> Network name:    'development-fork'
-> Network id:      4
-> Block gas limit: 10000000 (0x989680)
-
-
-1_initial_migration.js
-======================
-
-   Deploying 'ERC721Factory'
-   -------------------------
-
-Error:  *** Deployment Failed ***
-
-"ERC721Factory" could not deploy due to insufficient funds
-   * Account:  0xD8C30f316F9A0C92e5A79Db86feCED91c2348F06
-   * Balance:  0 wei
-   * Message:  sender doesn't have enough funds to send tx. The upfront cost is: 6982360000000000 and the sender's account only has: 0
-   * Try:
-      + Using an adequately funded account
-      + If you are using a local Geth node, verify that your node is synced.
-
-    at /Users/abhishekchadha/Desktop/niftycrates/node_modules/truffle/build/webpack:/packages/deployer/src/deployment.js:364:1
-    at process._tickCallback (internal/process/next_tick.js:68:7)
-Truffle v5.1.47 (core: 5.1.47)
-Node v10.17.0
-npm ERR! code ELIFECYCLE
-npm ERR! errno 1
-npm ERR! crate-contrats@1.0.0 deploy:contracts: `NODE_ENV=development truffle migrate development`
-npm ERR! Exit status 1
-npm ERR!
-npm ERR! Failed at the crate-contrats@1.0.0 deploy:contracts script.
-npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
-
-npm ERR! A complete log of this run can be found in:
-npm ERR!     /Users/abhishekchadha/.npm/_logs/2020-10-11T10_42_54_024Z-debug.log
-The terminal process "/usr/local/bin/zsh '-c', 'npm run deploy:contracts'" terminated with exit code: 1.
-
-Terminal will be reused by tasks, press any key to close it.
-
 > Executing task: npm run deploy:contracts <
 
 
