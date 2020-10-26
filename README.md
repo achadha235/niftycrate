@@ -6,7 +6,7 @@
 - https://twitter.com/achadha235
 
 ### One sentence description of what you built
-Decentralized ERC-721 loot boxes built with a Top-down composable ERC-721
+Decentralized ERC-721 loot boxes built as a top-down composable NFT
 
 ### Did you start working on this before the 8th of October?
 - I started programming on October 8th. Spent some time designing app / contracts from October 1 - 8th.
