@@ -98,6 +98,7 @@ function CrateSummaryCardImages({ loading, tokens, numberOfChildren }) {
     }
     const fetchData = async () => {
       const tokenData = await fetchTokenData(filterRank(tokens));
+      console.log(tokenData);
       setTokenData(tokenData);
     };
     fetchData();
