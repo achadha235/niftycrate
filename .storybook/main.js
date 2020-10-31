@@ -9,12 +9,6 @@ module.exports = {
     // 'PRODUCTION' is used when building the static version of storybook.
 
     // Make whatever fine-grained changes you need
-    // config.module.rules.push({
-    //   test: /\.scss$/,
-    //   use: ['style-loader', 'css-loader', 'sass-loader'],
-    //   include: path.resolve(__dirname, '../'),
-    // });
-
     config.module.rules[7].use[2].options = {
       sourceMap: true,
       plugins: [
@@ -23,12 +17,6 @@ module.exports = {
         require('autoprefixer'),
       ],
     };
-
-    // config.module.rules.push({
-    //   test: /\.scss$/,
-    //   use: ['style-loader', 'css-loader', 'sass-loader', ],
-    //   include: path.resolve(__dirname, '../'),
-    // });
 
     config.module.rules.push({
       test: /\.scss$/,
@@ -40,7 +28,7 @@ module.exports = {
         {
           loader: 'postcss-loader',
           options: {
-            // sourceMap: true,c
+            sourceMap: true,
             postcssOptions: {
               sourceMap: true,
               plugins: [
@@ -52,7 +40,6 @@ module.exports = {
           },
         },
       ],
-
       include: path.resolve(__dirname, '../'),
     });
 
@@ -68,7 +55,6 @@ module.exports = {
       path.join(__dirname, '../mocks/next/router.js')
     );
 
-    // Return the altered config
     return config;
   },
 };
