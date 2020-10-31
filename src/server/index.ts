@@ -10,12 +10,12 @@ import config from '../../config';
 import helmet from 'helmet';
 import typeDefs from '../gql/typeDefs';
 import resolvers from '../gql/resolvers';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, ApolloServerExpressConfig } from 'apollo-server-express';
 import cors from 'cors';
 import { setConfig } from 'next/config';
 import getConfig from 'next/config';
 import database, { AppModel, AppDBConnection, AppDBConfig } from '../db';
-import { startBlockchainServer, needsMigration } from '../services/ganache';
+// import { startBlockchainServer, needsMigration } from '../services/ganache';
 
 if (config.NODE_ENV === 'production') {
   require('@google-cloud/debug-agent').start({ allowExpressions: true });
@@ -28,9 +28,9 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 // Start dev blockchain
-if (config.NODE_ENV === 'development') {
-  // startBlockchainServer(needsMigration());
-}
+// if (config.NODE_ENV === 'development') {
+//   startBlockchainServer(needsMigration());
+// }
 
 export interface AppConfig {
   dbConfig: AppDBConfig;
@@ -65,7 +65,6 @@ export const server = app.prepare().then(async () => {
       models,
       connection,
     });
-
     console.info('Connected to database', db.dbConfig);
   } catch (err) {
     console.error(err);
@@ -79,7 +78,7 @@ export const server = app.prepare().then(async () => {
       res,
       models,
     }),
-  } as any);
+  } as ApolloServerExpressConfig);
 
   const server = express();
   server.set('trust proxy', true);

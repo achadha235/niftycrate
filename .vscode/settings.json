@@ -2,7 +2,9 @@
   "files.exclude": {
     "**/*.js": false,
     "**/*.jsx": false,
-    "**/next.config.js": false
+    "**/next.config.js": false,
+    ".next": true,
+    ".data": true
   },
   "editor.detectIndentation": true,
   "editor.formatOnSave": true,

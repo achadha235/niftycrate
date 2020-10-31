@@ -10,7 +10,7 @@ interface CrateCardProps {
   numberOfSales: number;
 }
 
-export default function CrateCard(props: CrateCardProps) {
+export default function CrateCard() {
   return (
     <Paper>
       <div className='bg-green-400'>
