@@ -4,6 +4,7 @@
     "**/*.jsx": false,
     "**/next.config.js": false
   },
+  "editor.detectIndentation": true,
   "editor.formatOnSave": true,
   "solidity.compileUsingRemoteVersion": "v0.5.8"
 }

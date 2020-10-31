@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "tailwind.config": [
+        "tailwind.config.js"
+      ]
+    },
     "target": "esnext",
     "lib": [
       "dom",

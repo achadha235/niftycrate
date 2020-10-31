@@ -1,5 +1,5 @@
 // Hello.fixture.jsx
-import Crate from './index';
+import Crate from '../components/Crate';
 
 export default (
   <Crate
@@ -13,7 +13,3 @@ export default (
     ]}
   />
 );
-
-// Okay, alternative found.
-// @ReactCosmos
-//  works way better! No unnecessary unbundling of core features or overly opinionated defaults. Just what I wanted!

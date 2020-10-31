@@ -1,54 +1,48 @@
 const path = require('path');
 const webpack = require('webpack');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+// const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
+// const resolveFrom = require('resolve-from');
+// const rootDir = process.cwd();
+// const styleLoaderPath = resolveFrom.silent(rootDir, 'style-loader');
+// const cssLoaderPath = resolveFrom.silent(rootDir, 'css-loader');
+// const postcssLoaderPath = resolveFrom.silent(rootDir, 'postcss-loader');
 
 module.exports = (config, { env }) => {
-  config.module.rules.push({
-    test: /\.(ts|tsx)$/,
-    loader: require.resolve('babel-loader'),
-    options: {
-      presets: ['next', ['react-app', { flow: false, typescript: true }]],
-      plugins: ['react-require'],
-    },
-  });
+  // console.log(config.module.rules[1]);
 
-  config.module.rules.push({
-    test: /\.scss$/,
-    loaders: [
-      // Loader for webpack to process CSS with PostCSS
-      'style-loader',
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-        },
-      },
-    ],
+  // console.log(config.module.rules[1].use[2]);
 
-    include: path.resolve(__dirname, '../'),
-  });
-  config.resolve.alias = {
-    'tailwind.config': './tailwind.config.ts',
-  };
-  config.resolve.alias['next/config'] = path.resolve(
-    path.join(__dirname, '../mocks/next/config.js')
-  );
-  config.resolve.alias['next/router'] = path.resolve(
-    path.join(__dirname, '../mocks/next/router.js')
-  );
+  // config.module.rules[1].use[2] = {
+  //   loader: config.module.rules[1].use[2],
+  //   options: {
+  //     plugins: ['tailwindcss'],
+  //   },
+  // };
 
-  config.resolve.alias['tailwind.config'] = path.resolve(
-    path.join(__dirname, './tailwind.config.js')
-  );
-  config.output = {};
-  config.output.publicPath = 'http://localhost:6006/';
-  config.resolve.extensions.push('.ts', '.tsx');
-  config.resolve.plugins = [
-    new TsconfigPathsPlugin({ configFile: 'tsconfig.json' }),
-  ];
+  // console.log(config.module.rules[1].use[2]);
+
+  // config.module.rules[1].use[1] = {
+  //   test: /\.css$/,
+  //   use: [
+  //     styleLoaderPath,
+  //     { loader: cssLoaderPath, options: { importLoaders: 1 } },
+  //     postcssLoaderPath,
+  //   ],
+  //   exclude: /node_modules/,
+  // };
+
+  // console.log(config.module.rules[1].use[1]);
 
   return {
     ...config,
+    resolve: {
+      ...(config.resolve || []),
+      alias: {
+        ...(config.resolve ? config.resolve.alias : {}),
+        'tailwind.config': path.join(__dirname, './tailwind.config.js'),
+      },
+    },
     plugins: [
       ...(config.plugins || []),
       new webpack.ProvidePlugin({ React: 'react' }),
