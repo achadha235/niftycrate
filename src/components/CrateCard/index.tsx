@@ -1,8 +1,8 @@
-import { Button, Chip, Paper, Typography } from '@material-ui/core';
-import Skeleton from '@material-ui/lab/Skeleton';
 import Web3 from 'web3';
-import { isNil } from 'lodash';
 import numeral from 'numeral';
+import { isNil } from 'lodash';
+import Skeleton from '@material-ui/lab/Skeleton';
+import { Button, Chip, Paper, Typography } from '@material-ui/core';
 
 export interface CrateCardProps {
   loading?: boolean;
