@@ -55,6 +55,12 @@ module.exports = {
       path.join(__dirname, '../mocks/next/router.js')
     );
 
+    config.resolve.alias['dizzle'] = path.resolve(
+      path.join(__dirname, '../mocks/drizzle/index.js')
+    );
+
+    config.resolve.alias['src'] = path.resolve(path.join(__dirname, '../src'));
+
     return config;
   },
 };

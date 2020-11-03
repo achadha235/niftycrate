@@ -6,49 +6,45 @@ import CrateSummaryCard from 'src/components/CrateSummaryCard';
 import { useDrizzle } from 'src/utils/drizzle';
 import PageControls from 'src/components/PageControls';
 
-function CrateBrowserContainer({ tokensPerPage = 6 }) {
-  const { useCacheCall } = useDrizzle();
-  const avaliableTokens = Number(useCacheCall('NiftyCrate', 'totalSupply'));
+function CrateBrowserContainer({ tokensPerPage = 8 }) {
   const router = useRouter();
   const { query } = router;
+  const { useCacheCall } = useDrizzle();
+
+  const avaliableTokens = Number(useCacheCall('NiftyCrate', 'totalSupply'));
   const pageNumber = getPageNumber(query);
   const startToken = getStartToken(pageNumber, tokensPerPage);
   const numPages = getNumPages(avaliableTokens, tokensPerPage);
-  const displayTokenIds = getDisplayTokenIds(
+  const tokenIds = getDisplayTokenIds(
     startToken,
     tokensPerPage,
     avaliableTokens
   );
 
   return (
-    <>
+    <AnimateSharedLayout type='crossfade'>
       <div className='p-2 pt-0 flex flex-wrap justify-center'>
-        <AnimateSharedLayout type='crossfade'>
-          <AnimatePresence exitBeforeEnter={true}>
-            {displayTokenIds.map((tokenId, i) => {
-              return (
-                <motion.div
-                  key={tokenId}
-                  variants={variant(i)}
-                  initial={'hidden'}
-                  animate={'show'}
-                >
-                  <CrateSummaryCard
-                    key={tokenId}
-                    className='m-1'
-                    crateId={tokenId}
-                  />
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </AnimateSharedLayout>
+        <AnimatePresence exitBeforeEnter={true}>
+          {tokenIds.map((tokenId, i) => (
+            <motion.div
+              key={tokenId}
+              variants={variant(i)}
+              initial={'hidden'}
+              animate={'show'}
+            >
+              <CrateSummaryCard
+                className='m-1'
+                crateId={tokenId}
+                key={tokenId}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
-
       {numPages > 1 && (
         <PageControls pageNumber={pageNumber} numPages={numPages} />
       )}
-    </>
+    </AnimateSharedLayout>
   );
 }
 

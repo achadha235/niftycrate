@@ -14,8 +14,9 @@ import NiftyCrate from 'src/artifacts/NiftyCrate.json';
 import NiftyCrateOpener from 'src/artifacts/NiftyCrateOpener.json';
 // import Axie from 'src/artifacts/Axie.json';
 // import Cryptokitties from 'src/artifacts/Cryptokitties.json';
+
 import { Drizzle } from '@drizzle/store';
-import useEthereum from './hooks/useEthereum';
+import useEthereum from '../hooks/useEthereum';
 import { drizzleReactHooks as DrizzleHooks } from '@drizzle/react-plugin';
 import { Store } from 'redux';
 import LoadingScreen from 'src/components/LoadingScreen';

@@ -15,7 +15,6 @@ import cors from 'cors';
 import { setConfig } from 'next/config';
 import getConfig from 'next/config';
 import database, { AppModel, AppDBConnection, AppDBConfig } from '../db';
-// import { startBlockchainServer, needsMigration } from '../services/ganache';
 
 if (config.NODE_ENV === 'production') {
   require('@google-cloud/debug-agent').start({ allowExpressions: true });
@@ -26,11 +25,6 @@ const port = config.PORT;
 const dev = config.NEXT_DEV;
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
-// Start dev blockchain
-// if (config.NODE_ENV === 'development') {
-//   startBlockchainServer(needsMigration());
-// }
 
 export interface AppConfig {
   dbConfig: AppDBConfig;
@@ -113,7 +107,7 @@ export const server = app.prepare().then(async () => {
   });
 
   httpServer.listen(port, () => {
-    console.log('Started with', getConfig().serverRuntimeConfig);
+    console.log('⚙️ Started with', getConfig().serverRuntimeConfig);
     console.log(`🚀 Server ready at http://localhost:${port}`);
   });
 });
