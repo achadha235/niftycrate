@@ -1,34 +1,34 @@
-import {
-  Avatar,
-  Button,
-  Card,
-  CardHeader,
-  Checkbox,
-  Fade,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Modal,
-  Paper,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+// import {
+//   Avatar,
+//   Button,
+//   Card,
+//   CardHeader,
+//   Checkbox,
+//   Fade,
+//   List,
+//   ListItem,
+//   ListItemAvatar,
+//   ListItemText,
+//   Modal,
+//   Paper,
+//   TextField,
+//   Typography,
+// } from '@material-ui/core';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { isNil } from 'lodash';
-import Crate from 'src/components/Crate';
+// import { useState, useEffect } from 'react';
+// import { isNil } from 'lodash';
+// import Crate from 'src/components/Crate';
 
-import CrateSummaryCard from 'src/components/CrateSummaryCard';
+// import CrateSummaryCard from 'src/components/CrateSummaryCard';
 import AppLayoutContainer from 'src/containers/AppLayout';
-import { useDrizzle, useDrizzleState, ContractForm } from 'src/utils/drizzle';
-import shortAddress from 'src/utils/shortAddress';
-import getCrateContents from '../hooks/getCrateContents';
-import getCrateDetails from '../hooks/getCrateDetails';
-import TokenTransferBrowser from 'src/components/TokenTransferBrowser';
-import { mockTokenAddressMapping, mockTokenMapping } from 'src/constants';
-import { fetchTokenData } from 'src/services/opensea';
-import { Token } from '../nft';
+// import { useDrizzle, useDrizzleState, ContractForm } from 'src/utils/drizzle';
+// import shortAddress from 'src/utils/shortAddress';
+// import getCrateContents from '../../hooks/getCrateContents';
+// import getCrateDetails from '../../hooks/getCrateDetails';
+// import TokenTransferBrowser from 'src/__old__/Contract/TokenTransferBrowser';
+// import { mockTokenAddressMapping, mockTokenMapping } from 'src/constants';
+// import { fetchTokenData } from 'src/services/opensea';
+// import { Token } from '../../__old__/nft';
 
 import CrateView from 'src/containers/CrateView';
 

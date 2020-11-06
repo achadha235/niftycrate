@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 
-export default function LoadingScreen({ text = '' }) {
+export interface LoadingScreenProps {
+  text: string;
+}
+
+export default function LoadingScreen(props: LoadingScreenProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -10,7 +14,7 @@ export default function LoadingScreen({ text = '' }) {
       className='w-full h-full flex justify-center items-center'
     >
       <Loader />
-      {text}
+      {props.text}
     </motion.div>
   );
 }
@@ -49,7 +53,8 @@ export function Loader() {
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: #333;
+          background-color: #f0f0f0;
+          border: solid 1px #0f0f0f;
           -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
           animation: sk-foldCubeAngle 2.4s infinite linear both;
           -webkit-transform-origin: 100% 100%;

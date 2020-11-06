@@ -22,6 +22,11 @@ export interface CrateCardProps {
   };
 }
 
+/**
+ * CrateCard - Shows a basic card for a crate
+ * @param props
+ */
+
 export default function CrateCard(props: CrateCardProps) {
   if (props.loading) {
     return <CrateCardSkeleton />;

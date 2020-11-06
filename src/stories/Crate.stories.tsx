@@ -2,9 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import CrateCard, { CrateCardProps } from '../components/CrateCard';
-import { fetchTokenData } from '../services/opensea';
 import mockToken from '../../mocks/token';
-import Web3 from 'web3';
 
 export default {
   title: 'CrateCard',

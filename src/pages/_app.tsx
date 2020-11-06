@@ -7,13 +7,12 @@ import Head from 'next/head';
 import withApollo from '../gql/withApollo';
 import tailwindConfig from '../../tailwind.config';
 import theme from '../styles/theme';
+
 import getConfig from 'next/config';
 import Web3 from 'web3';
 import { API as OnboardAPI } from 'bnc-onboard/dist/src/interfaces';
 import NiftyCrate from 'src/artifacts/NiftyCrate.json';
 import NiftyCrateOpener from 'src/artifacts/NiftyCrateOpener.json';
-// import Axie from 'src/artifacts/Axie.json';
-// import Cryptokitties from 'src/artifacts/Cryptokitties.json';
 
 import { Drizzle } from '@drizzle/store';
 import useEthereum from '../hooks/useEthereum';

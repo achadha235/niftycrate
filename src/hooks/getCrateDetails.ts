@@ -79,6 +79,7 @@ function getCrateDetails(crateId) {
   );
 
   return {
+    crateId,
     owner,
     numberOfChildren,
     canOpen,

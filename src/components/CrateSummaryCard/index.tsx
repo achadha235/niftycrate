@@ -7,7 +7,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { Button, Typography, Avatar, Paper, Badge } from '@material-ui/core';
 
 import shortAddress from 'src/utils/shortAddress';
-import getCrateDetails from 'src/pages/hooks/getCrateDetails';
+import getCrateDetails from 'src/hooks/getCrateDetails';
 import { fetchTokenData } from 'src/services/opensea';
 
 function EmptyCrateThumbnail() {
@@ -158,6 +158,7 @@ function CrateSummaryLoading() {
 }
 
 function CrateSummaryCardDetails({
+  crateId,
   loading,
   owner,
   canOpen,
@@ -169,7 +170,7 @@ function CrateSummaryCardDetails({
   rare,
   ultra,
 }) {
-  const crateId = 1;
+  // const crateId = 1;
   const avatarUrl = `https://robohash.org/${owner}.png?set=set3`;
   const buyCost = Web3.utils.fromWei(cost || '0', 'ether');
   const totalOpenCost = Web3.utils.fromWei(

@@ -67,7 +67,7 @@
     "deploy:contracts": "NODE_ENV=development truffle migrate development",
     "cosmos": "cosmos",
     "cosmos:export": "cosmos-export",
-    "storybook": "start-storybook -p 6006 --no-dll",
+    "storybook": "start-storybook -p 6006 --no-dll -s ./public",
     "build-storybook": "build-storybook --no-dll"
   },
   "devDependencies": {
