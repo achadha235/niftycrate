@@ -1,6 +1,6 @@
 import '../styles/main.scss';
 import pkg from '../../package.json';
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Head from 'next/head';
@@ -54,6 +54,7 @@ function App({ Component, pageProps, apollo, router, ...otherProps }) {
       },
     },
   });
+
   const appContext = {
     name: pkg.name,
     theme: tailwindConfig,
@@ -62,6 +63,8 @@ function App({ Component, pageProps, apollo, router, ...otherProps }) {
     drizzle,
     drizzleStore,
   };
+
+  useEffect(refreshOnChainIdChangeEffect, []);
 
   return (
     <>
@@ -88,6 +91,14 @@ function App({ Component, pageProps, apollo, router, ...otherProps }) {
       </ThemeProvider>
     </>
   );
+}
+
+function refreshOnChainIdChangeEffect() {
+  const refresh = () => {
+    document.location.reload();
+  };
+  ethereum.on('chainChanged', refresh);
+  return () => ethereum.off('chainChanged', refresh);
 }
 
 export default withApollo(App);

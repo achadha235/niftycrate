@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, Paper, Typography } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Link from 'next/link';
@@ -8,6 +8,18 @@ import NextNprogress from 'nextjs-progressbar';
 import tailwindConfig from '../../tailwind.config';
 import Web3 from 'web3';
 import { spawn } from 'child_process';
+import Header from 'src/components/Header';
+
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import { useState } from 'react';
+import HowItWorks from 'src/components/HowItWorks';
+
+import { useRouter } from 'next/router';
+import { Store } from 'src/components/Store';
+import formatEth from 'src/utils/formatEth';
 
 function AppHeaderContainer() {
   const { account, balance } = useDrizzleState((drizzleState) => {
@@ -16,6 +28,8 @@ function AppHeaderContainer() {
       balance: drizzleState.accountBalances[drizzleState.accounts[0]],
     };
   });
+
+  const router = useRouter();
 
   const { useCacheSend, useCacheCall } = useDrizzle();
   const NC = 'NiftyCrate';
@@ -29,6 +43,18 @@ function AppHeaderContainer() {
   }));
   const onBuyCrate = () => mint.send(account, { value: mintCost });
   const onBuyGems = () => generateNonces.send(10);
+
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <div className='progressWrapper'>
@@ -39,7 +65,51 @@ function AppHeaderContainer() {
           height={3}
         />
       </div>
-      <AppBar className='appBar' style={{ marginTop: 3 }}>
+
+      <Header
+        user={
+          account
+            ? {
+                balance: formatEth(balance),
+                address: account,
+                numTokens,
+                numGems,
+              }
+            : null
+        }
+        onAppNameClicked={() => router.push('/')}
+        onStoreClicked={handleOpen}
+        onAllCratesClicked={() => router.push('/')}
+        onMyCratesClicked={() => {}}
+        onHowItWorksClicked={() => router.push('/about')}
+        onLoginClicked={() => {}}
+        onLogoutClicked={() => {}}
+      />
+
+      <Modal
+        aria-labelledby='transition-modal-title'
+        aria-describedby='transition-modal-description'
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <Paper className='p-4 px-5 my-10' style={{ width: 800 }}>
+            <Store
+              onBuyCrate={onBuyCrate}
+              onBuyGems={onBuyGems}
+              cratePrice={formatEth(mintCost)}
+            />
+          </Paper>
+        </Fade>
+      </Modal>
+
+      {/* <AppBar className='appBar' style={{ marginTop: 3 }}>
         <Toolbar variant='dense'>
           <Link href='/'>
             <span className='uppercase text-sm font-medium tracking-widest cursor-pointer flex flex-row justify-center items-center'>
@@ -85,7 +155,7 @@ function AppHeaderContainer() {
             <Button color='inherit'>Login</Button>
           )}
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <style jsx>{`
         .appBar {
           margintop: 1px;
@@ -107,5 +177,21 @@ function AppHeaderContainer() {
     </>
   );
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  })
+);
 
 export default AppHeaderContainer;

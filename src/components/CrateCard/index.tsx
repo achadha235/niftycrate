@@ -5,6 +5,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { Button, Chip, Paper, Typography } from '@material-ui/core';
 
 export interface CrateCardProps {
+  className?: string;
   loading?: boolean;
   token?: {
     image: string;
@@ -33,7 +34,7 @@ export default function CrateCard(props: CrateCardProps) {
   }
 
   return (
-    <Paper className='max-w-lg h-48 flex p-1'>
+    <Paper className={`max-w-lg h-48 flex p-1 ${props.className}`}>
       <div className='w-1/3'>
         <div
           className='h-full rounded-sm flex items-start justify-center'

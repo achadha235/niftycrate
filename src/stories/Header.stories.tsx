@@ -1,6 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import Header, { HeaderProps } from 'src/components/Header';
+import getUserImage from 'src/utils/getUserImage';
 
 export default {
   title: 'Header',
@@ -14,10 +15,13 @@ const Template: Story = (args: HeaderProps) => <Header {...args} />;
 
 export const LoggedIn = Template.bind({});
 
+const address = '0x24325354ABCDEF234';
+const imageUrl = getUserImage(address);
 LoggedIn.args = {
   user: {
-    address: '0x24325354ABCDEF234',
-    imageUrl: 'https://placehold.it/40x40',
+    address,
+    balance: '0.235',
+    imageUrl,
   },
 };
 

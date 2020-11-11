@@ -7,18 +7,21 @@ import {
   MenuItem,
   MenuList,
   Avatar,
+  Typography,
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToAppTwoTone';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import shortAddress from 'src/utils/shortAddress';
+import UserAvatar from '../UserAvatar';
 
 export interface UserButtonProps {
   className: string;
   onLogoutClicked: React.MouseEventHandler;
   user: {
+    balance: string;
     address: string;
-    imageUrl: string;
+    // imageUrl: string;
   };
 }
 
@@ -68,8 +71,13 @@ export function UserButton(props: UserButtonProps) {
         aria-haspopup='true'
         onClick={handleToggle}
       >
-        <Avatar className='h-8 w-8 mr-2' src='https://placehold.it/20x20' />
-        {shortAddress(props.user.address)}
+        <Avatar className='h-8 w-8 mr-2'>
+          <UserAvatar user={props.user.address} />
+        </Avatar>
+        Ξ{' '}
+        <Typography className='font-mono font-bold'>
+          {props.user.balance}
+        </Typography>
       </Button>
       <Popper
         open={open}
@@ -86,13 +94,19 @@ export function UserButton(props: UserButtonProps) {
                 placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
-            <Paper>
+            <Paper className='w-48'>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList
                   autoFocusItem={open}
                   id='menu-list-grow'
                   onKeyDown={handleListKeyDown}
                 >
+                  <MenuItem>
+                    <Typography variant='body2' className='font-mono font-bold'>
+                      {props.user.address}
+                    </Typography>
+                  </MenuItem>
+
                   <MenuItem
                     onClick={(event) => {
                       props.onLogoutClicked(event);

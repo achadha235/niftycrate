@@ -9,8 +9,11 @@ import PersonIcon from '@material-ui/icons/PersonTwoTone';
 export interface HeaderProps {
   user?: {
     address: string;
-    imageUrl: string;
+    balance: string;
+    numTokens: number;
+    numGems: number;
   };
+  onAppNameClicked: React.MouseEventHandler;
   onStoreClicked: React.MouseEventHandler;
   onAllCratesClicked: React.MouseEventHandler;
   onMyCratesClicked: React.MouseEventHandler;
@@ -20,10 +23,14 @@ export interface HeaderProps {
 }
 
 function Header(props: HeaderProps) {
+  const height = 45;
   return (
-    <AppBar className='appBar'>
+    <AppBar className='appBar' style={{ height }}>
       <Toolbar variant='dense'>
-        <span className='uppercase text-sm font-medium tracking-widest cursor-pointer flex flex-row justify-center items-center'>
+        <span
+          className='uppercase text-sm font-medium tracking-widest cursor-pointer flex flex-row justify-center items-center'
+          onClick={props.onAppNameClicked}
+        >
           <img className='h-6 mr-2 logo' src='/images/logo.svg' />
           <b>Nifty</b>Crates
         </span>
@@ -51,7 +58,7 @@ function Header(props: HeaderProps) {
         </Button>
 
         {/* Crates */}
-        <Button
+        {/* <Button
           onClick={props.onMyCratesClicked}
           variant='text'
           className='ml-8'
@@ -59,7 +66,7 @@ function Header(props: HeaderProps) {
           startIcon={<AppsIcon />}
         >
           My Crates
-        </Button>
+        </Button> */}
 
         {/* FAQ */}
         <Button
@@ -71,6 +78,20 @@ function Header(props: HeaderProps) {
         >
           How it Works
         </Button>
+
+        <div className='ml-auto'>
+          <Button
+            startIcon={<img style={{ height: 30 }} src='/images/box.svg' />}
+          >
+            {props.user.numTokens}
+          </Button>
+
+          <Button
+            startIcon={<img style={{ height: 30 }} src='/images/gem.svg' />}
+          >
+            {props.user.numGems}
+          </Button>
+        </div>
 
         {/* User */}
         {props.user ? (

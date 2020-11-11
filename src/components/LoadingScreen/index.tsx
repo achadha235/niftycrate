@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 export interface LoadingScreenProps {
-  text: string;
+  text?: string;
 }
 
 export default function LoadingScreen(props: LoadingScreenProps) {

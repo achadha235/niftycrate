@@ -6687,6 +6687,14 @@ autoprefixer@^9.4.5, autoprefixer@^9.7.2, autoprefixer@^9.7.5:
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
+avataaars@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/avataaars/-/avataaars-1.2.1.tgz#8e2e968dbd7f558876f1f18f56973e7aa47afbec"
+  integrity sha512-4MmcXx3EKGwkKqEtVRiKxM08MMib2KYC1o5DcotpLUVuoe5EkWNuhJVB2JAH753II4VzMK7fO2EA5rf5QirPQg==
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.6.0"
+
 await-semaphore@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/await-semaphore/-/await-semaphore-0.1.3.tgz#2b88018cc8c28e06167ae1cdff02504f1f9688d3"

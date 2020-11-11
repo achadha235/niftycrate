@@ -4,9 +4,21 @@ import { motion } from 'framer-motion';
 
 import styleGenerator from './index.style';
 
-function Crate({ tokens }) {
+export interface CrateProps {
+  tokens: any;
+  size?: number;
+}
+
+function Crate(props: CrateProps) {
   const [currFace, setCurrFace] = useState(0);
   const [images, setImages] = useState([]);
+  const size = props.size || 500;
+  const tokens = props.tokens || [];
+  const crateStyle = styleGenerator({
+    size,
+  });
+  const styledClassName = (c?) =>
+    c ? `${crateStyle.className} ${c}` : crateStyle.className;
 
   useEffect(() => {
     setTimeout(() => {
@@ -67,7 +79,12 @@ function Crate({ tokens }) {
         {faces.map((face, i) => (
           <motion.div
             key={face}
-            className={styledClassName(face)}
+            style={{
+              backgroundColor: tokens[i] ? tokens[i].background_color : 'white',
+            }}
+            className={`${styledClassName(
+              face
+            )} flex justify-center items-center`}
             animate={{
               outlineColor,
               boxShadow,
@@ -122,15 +139,9 @@ const floatTransition = {
   duration: 5,
 };
 
-const size = 500;
 const boxShadowSpread = 0;
 const boxShadowBlur = 0;
 const boxShadowSize = `0px 0px ${boxShadowBlur}px ${boxShadowSpread}px`;
-const crateStyle = styleGenerator({
-  size,
-});
-const styledClassName = (c?) =>
-  c ? `${crateStyle.className} ${c}` : crateStyle.className;
 
 const outlineColor = [
   tailwindConfig.theme.colors.indigo[300],

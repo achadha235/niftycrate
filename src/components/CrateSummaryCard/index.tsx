@@ -33,7 +33,7 @@ function selectNItems(arr, n, startIndex) {
 
 function CrateThumbnailImages({ tokens }) {
   const numPerScreen = 4;
-  const switchPageIntervalMs = 4000;
+  const switchPageIntervalMs = 6000;
   const [startIdx, setStartIdx] = useState(0);
   useEffect(() => {
     const pageTransitionInterval = setInterval(() => {
@@ -51,7 +51,7 @@ function CrateThumbnailImages({ tokens }) {
   useEffect(() => {
     for (var i = 0; i < tokens.length; i++) {
       const newImg = new Image(100, 100);
-      newImg.src = tokens[i].image_preview_url;
+      newImg.src = tokens[i].image_thumbnail_url;
     }
   }, [tokens, startIdx, tokens.length]);
   return (
@@ -61,8 +61,8 @@ function CrateThumbnailImages({ tokens }) {
           initial='hide'
           animate='show'
           exit='hide'
-          key={`${tokenData.image_preview_url}::${startIdx}`}
-          src={tokenData.image_preview_url}
+          key={`${tokenData.image_thumbnail_url}::${startIdx}`}
+          src={tokenData.image_thumbnail_url}
           variants={{
             show: {
               opacity: 1,

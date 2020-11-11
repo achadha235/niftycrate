@@ -28,6 +28,7 @@ declare module '*.jpg?webp' {
 declare function require(name: string);
 
 declare global {
+  const ethereum;
   namespace Express {
     interface Request {
       user?: User;
